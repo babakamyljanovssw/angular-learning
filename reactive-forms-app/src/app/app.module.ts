@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { RecipiesComponent } from './recipies/recipies.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    RecipiesComponent
   ],
   imports: [
     BrowserModule,
