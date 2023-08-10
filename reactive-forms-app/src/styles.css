@@ -2,3 +2,31 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.page-title {
+    color: #cc4141;
+}
+
+.custom-btn-primary {
+    background-color: #322653;
+    color: white;
+}
+
+.custom-btn-primary:hover {
+    background-color: #512B81;
+    color: white;
+}
+
+.custom-btn-primary:disabled {
+    background-color: #8062D6;;
+    color: white;
+}
+
+.form-label {
+    font-size: 1.3rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #CC4141;
+    box-shadow: inset 0 0.1rem 0.1rem rgba(0, 0, 0, 0.075), 0 0 0.5rem rgba(255, 0, 0, 0.6);
+}
