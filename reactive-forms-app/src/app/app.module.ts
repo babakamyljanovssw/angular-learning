@@ -10,6 +10,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RecipiesComponent } from './recipies/recipies.component';
 import { IngredientFormComponent } from './recipe-form/recipe-form.component';
 import { SelectIngredientDialogComponent } from './select-ingredient-dialog/select-ingredient-dialog.component';
+
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,8 @@ import { SelectIngredientDialogComponent } from './select-ingredient-dialog/sele
     AppRoutingModule,
     BrowserAnimationsModule,
     AppMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

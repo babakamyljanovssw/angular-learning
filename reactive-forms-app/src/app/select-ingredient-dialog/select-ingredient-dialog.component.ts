@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, of, startWith, map } from 'rxjs';
-export interface Ingredient {
-  name: string;
-}
-
+import { Observable, of, startWith, map, Subscription } from 'rxjs';
+import { Ingredient } from '../models/ingredient';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-select-ingredient-dialog',
   templateUrl: './select-ingredient-dialog.component.html',
@@ -12,26 +10,41 @@ export interface Ingredient {
 })
 export class SelectIngredientDialogComponent {
   ingredientsControl = new FormControl<string | Ingredient>('');
-  options: Ingredient[] = [{name: 'Mary'}, {name: 'Shelley'}, {name: 'Igor'}];
+  private subscription: Subscription = new Subscription();
+
   filteredOptions: Observable<Ingredient[]> = of();
+
+  ingredients: Ingredient[] = [];
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+    this.subscription = data.ingredients$.subscribe((ingredients: Ingredient[]) => {
+      this.ingredients = ingredients;
+    });
+    console.log(this.ingredients);
+  }
 
   ngOnInit() {
     this.filteredOptions = this.ingredientsControl.valueChanges.pipe(
       startWith(''),
       map(value => {
-        const name = typeof value === 'string' ? value : value?.name;
-        return name ? this._filter(name as string) : this.options.slice();
+        const name = typeof value === 'string' ? value : value?.ingredientName;
+        return name ? this._filter(name as string) : this.ingredients.slice()
       }),
     );
   }
 
-  displayFn(ingredient: Ingredient): string {
-    return ingredient && ingredient.name ? ingredient.name : '';
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
-  private _filter(name: string): Ingredient[] {
-    const filterValue = name.toLowerCase();
+  displayFn(ingredient: Ingredient): string {
+    return ingredient && ingredient.ingredientName ? ingredient.ingredientName : '';
+  }
 
-    return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+  private _filter(ingredientName: string): Ingredient[] {
+    const filterValue = ingredientName.toLowerCase();
+    return this.ingredients.filter(
+      ingredient => ingredient.ingredientName.toLowerCase().includes(filterValue)
+    );
   }
 }
