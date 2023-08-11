@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
-import { Observable, of, startWith, map } from 'rxjs';
-
-export interface Ingredient {
-  name: string;
-}
+import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { SelectIngredientDialogComponent } from '../select-ingredient-dialog/select-ingredient-dialog.component';
 
 @Component({
   selector: 'app-ingredient-form',
   templateUrl: './recipe-form.component.html',
-  styleUrls: ['./recipe-form.component.css']
+  styleUrls: ['./recipe-form.component.css'],
 })
 export class IngredientFormComponent {
   addMode: boolean = true;
@@ -21,34 +18,18 @@ export class IngredientFormComponent {
     unitOfMeasurement: ['']
   });
 
-  ingredientsControl = new FormControl<string | Ingredient>('');
-  options: Ingredient[] = [{name: 'Mary'}, {name: 'Shelley'}, {name: 'Igor'}];
-  filteredOptions: Observable<Ingredient[]> = of();
-
-  ngOnInit() {
-    this.filteredOptions = this.ingredientsControl.valueChanges.pipe(
-      startWith(''),
-      map(value => {
-        const name = typeof value === 'string' ? value : value?.name;
-        return name ? this._filter(name as string) : this.options.slice();
-      }),
-    );
-  }
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public dialog: MatDialog
   ) {}
 
-  onSubmit() {
+  onSubmit() {}
 
-  }
+  openDialog() {
+    const dialogRef = this.dialog.open(SelectIngredientDialogComponent);
 
-  displayFn(ingredient: Ingredient): string {
-    return ingredient && ingredient.name ? ingredient.name : '';
-  }
-
-  private _filter(name: string): Ingredient[] {
-    const filterValue = name.toLowerCase();
-
-    return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

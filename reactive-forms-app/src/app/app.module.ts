@@ -9,13 +9,14 @@ import { AppMaterialModule } from './app-material/app-material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RecipiesComponent } from './recipies/recipies.component';
 import { IngredientFormComponent } from './recipe-form/recipe-form.component';
-
+import { SelectIngredientDialogComponent } from './select-ingredient-dialog/select-ingredient-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     RecipiesComponent,
-    IngredientFormComponent
+    IngredientFormComponent,
+    SelectIngredientDialogComponent
   ],
   imports: [
     BrowserModule,
