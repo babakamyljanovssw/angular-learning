@@ -1,7 +1,7 @@
 export interface Ingredient {
-    ingredientId: number,
-    ingredientName: string,
-    kilojoulesPerUnit: number,
-    unitOfMeasurement: string,
-    ingredientPicture: string,
+    id: number,
+    name: string,
+    kilojoules: number,
+    unit: string,
+    picture: string,
 }
