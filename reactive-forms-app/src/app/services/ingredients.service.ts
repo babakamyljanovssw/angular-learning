@@ -14,7 +14,7 @@ export class IngredientsService {
   }
 
   /** GET ingredients from the server */
-  getAllIngredient() {
+  getAllIngredients() {
     return of(INGREDIENTS);
   }
 }

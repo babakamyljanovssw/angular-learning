@@ -6,10 +6,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-select-ingredient-dialog',
-  templateUrl: './select-ingredient-dialog.component.html',
-  styleUrls: ['./select-ingredient-dialog.component.css']
+  templateUrl: './select-ingredient-mat-dialog.component.html',
+  styleUrls: ['./select-ingredient-mat-dialog.component.css']
 })
-export class SelectIngredientDialogComponent {
+export class SelectIngredientMatDialogComponent {
   selectIngredientForm: FormGroup;
   filteredOptions: Observable<Ingredient[]> = of();
   ingredients: Ingredient[] = [];
