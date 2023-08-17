@@ -17,6 +17,7 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { IngredientFormComponent } from './recipe-form/recipe-form.component';
 import { SelectIngredientMatDialogComponent } from './select-ingredient-mat-dialog/select-ingredient-mat-dialog.component';
 import { SelectIngredientBootstrapDialogComponent } from './select-ingredient-bootstrap-dialog/select-ingredient-bootstrap-dialog.component';
+import { FormArrayComponent } from './form-array/form-array.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SelectIngredientBootstrapDialogComponent } from './select-ingredient-bo
     RecipesComponent,
     IngredientFormComponent,
     SelectIngredientMatDialogComponent,
-    SelectIngredientBootstrapDialogComponent
+    SelectIngredientBootstrapDialogComponent,
+    FormArrayComponent
   ],
   imports: [
     BrowserModule,
