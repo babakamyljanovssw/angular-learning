@@ -15,6 +15,7 @@
 <form [formGroup]="selectIngredientsForm" (ngSubmit)="onSubmit()">
     <h1 class="text-center">Select Ingredients</h1>
     <div formArrayName="recipeIngredients" *ngFor="let ing of  getRecipeIngredientsArray().controls; let i=index">
+        
         <div [formGroupName]="i" class="row mb-2 mt-4">
             <div class="col-4">
                 <input type="text" class="form-control form-control-lg" formControlName="name" placeholder="name">
@@ -57,6 +58,7 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-12 text-center">
             <button class="btn btn-secondary btn-lg" type="button" (click)="pushToArray()">
@@ -71,8 +73,6 @@
         </div>    
     </div>
 
-    
-
     <div class="row mt-4">
         <div class="col-12" *ngFor="let ing of getRecipeIngredientsArray().controls; let i=index">
             <p class="fs-4">{{i}}: {{ getRecipeIngredientsArray().value[i] | json }}</p>
@@ -82,4 +82,3 @@
         </div>
     </div>
 </form>
-
