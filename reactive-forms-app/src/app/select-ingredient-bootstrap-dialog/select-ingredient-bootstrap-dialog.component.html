@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title">Edit Ingredients</h1>
+</div>
+<div class="modal-body">
+    <form [formGroup]="selectIngredientForm">
+        <div class="row mb-2">
+            <div class="col-4">
+                <input
+                    id="typeahead-template"
+                    type="text"
+                    class="form-control form-control-lg"
+                    placeholder="search for ingredients"
+                    formControlName="ingredientControl"
+                    [ngbTypeahead]="search"
+                    [inputFormatter]="formatter"
+                    [resultFormatter]="formatter"
+                    [selectOnExact]="true"
+                />
+            </div> 
+            <div class="col-6">
+                <div class="input-group d-flex align-items-center gap-2">
+                    <label for="quantity" class="form-label">Quantity:</label>
+                    <input type="text" class="form-control form-control-lg rounded" id="quantity">
+                    <input 
+                        class="form-control form-control-lg rounded"
+                        placeholder="unit"
+                        formControlName="unitControl" 
+                        [value]="selectIngredientForm.get('unitControl')?.value"
+                        readonly>
+                </div>
+            </div>
+            <div class="col-2 text-end">
+                <button class="btn btn-danger">
+                    <i class="bi bi-trash-fill"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="col">
+    <button type="button" class="btn btn-primary" (click)="activeModal.close('Save click')">Save</button>
+    <button type="button" class="btn btn-danger" (click)="activeModal.close('Cancel click')">Cancel</button>
+</div>

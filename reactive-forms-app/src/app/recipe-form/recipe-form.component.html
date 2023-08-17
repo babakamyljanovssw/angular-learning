@@ -1,0 +1,68 @@
+<!-- 1st row contains page title -->
+<div class="row">
+    <h1 class="page-title">Add Recipe</h1>
+</div>
+
+<form [formGroup]="ingredientForm" (ngSubmit)="onSubmit()">
+    <!-- 2nd row contains all form controls -->
+    <div class="row mt-4">
+        <!-- left side of form -->
+        <div class="col-6"> 
+            <div class="mb-3">
+                <label for="ingredient-name" class="form-label">Name</label>
+                <input type="text" class="form-control form-control-lg" id="ingredient-name" formControlName="ingredientName">
+            </div>
+            
+            <!-- area for entering picture url -->
+            <div class="mb-3">
+                <label for="ingredient-picture" class="form-label">Picture Url</label>
+                <input type="text" class="form-control form-control-lg" id="ingredient-picture" formControlName="ingredientPicture">
+            </div>
+            <!-- area for showing the picture -->
+            <div class="rounded border border-danger d-flex align-items-center justify-content-center image-preview-box">
+                <div *ngIf="ingredientForm.get('ingredientPicture')?.value !== ''; else imagePreview">
+                    <img class="img-fluid" src="{{ingredientForm.get('ingredientPicture')?.value}}" alt="Image Preview">
+                </div>
+                <ng-template #imagePreview>
+                    Image Preview
+                </ng-template>
+            </div>
+        </div>
+
+        <!-- right ride of form contains other properties of ingredient -->
+        <div class="col-6 rounded border border-secondary p-4 mt-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <label for="ingredient-picture" class="form-label">Ingredients</label>
+                <button class="btn btn-secondary" (click)="openDialog()">
+                Edit
+            </button>
+            </div>
+            <h4>No ingredient added yet...</h4>
+            <ul class="list-group">
+                <li class="list-group-item">An item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+                <li class="list-group-item">A fourth item</li>
+                <li class="list-group-item">And a fifth one</li>
+              </ul>
+        </div>
+        <div class="col-12 mt-4">
+            <div class="mb-3">
+                <label for="ingredient-name" class="form-label">Recipe Instructions</label>
+                <textarea class="form-control form-control-lg" 
+                    id="ingredient-name" 
+                    style="height: 200px;" 
+                    placeholder="Step 1: ...">
+                </textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3rd row contains action buttons based on add/edit modes -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <button type="submit" class="btn btn-lg btn-primary mr-2">Submit</button>
+            <button type="button" class="btn btn-lg btn-secondary">Cancel</button>
+        </div>
+    </div>
+</form>

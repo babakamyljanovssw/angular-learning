@@ -1,26 +1,41 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppMaterialModule } from './app-material/app-material.module';
+
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppMaterialModule } from './app-material/app-material.module';
 import { NavbarComponent } from './navbar/navbar.component';
-import { RecipiesComponent } from './recipies/recipies.component';
+import { RecipesComponent } from './recipes/recipes.component';
+import { IngredientFormComponent } from './recipe-form/recipe-form.component';
+import { SelectIngredientMatDialogComponent } from './select-ingredient-mat-dialog/select-ingredient-mat-dialog.component';
+import { SelectIngredientBootstrapDialogComponent } from './select-ingredient-bootstrap-dialog/select-ingredient-bootstrap-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    RecipiesComponent
+    RecipesComponent,
+    IngredientFormComponent,
+    SelectIngredientMatDialogComponent,
+    SelectIngredientBootstrapDialogComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AppMaterialModule
+    AppMaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
