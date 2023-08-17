@@ -1,7 +1,7 @@
 <div class="row">
     <h2 class="fs-2">Recipe Ingredients</h2>
-    <div class="col-12 rounded border border-secondary p-4 mt-4" *ngIf="recipeIngredients.length > 0; else empty">
-        <ul class="list-group" *ngFor="let item of recipeIngredients">
+    <div class="col-12 rounded border border-secondary p-4 mt-4" *ngIf="recipeIngredientsMock.length > 0; else empty">
+        <ul class="list-group" *ngFor="let item of recipeIngredientsMock">
             <li class="list-group-item fs-4">{{item.quantity}} {{item.unit}} {{item.name}}</li>
         </ul>
     </div>
@@ -13,36 +13,65 @@
 </div>
 
 <form [formGroup]="selectIngredientsForm" (ngSubmit)="onSubmit()">
-    <div class="row mb-2 mt-4">
-        <h1 class="text-center">Select Ingredients</h1>
-        <div formArrayName="recipeIngredients" *ngFor="let ing of  getRecipeIngredientsArray().controls; let i=index">
-            <div [formGroupName]="i" class="mb-2">
-                <div class="d-flex justify-content-between align-items-center gap-2">
-                    <div class="col-4">
-                        <input type="text" class="form-control form-control-lg" formControlName="name" placeholder="name">
-                    </div>
-                    <div class="col-6">
-                        <div class="input-group gap-2">
-                            <input type="text" class="form-control form-control-lg rounded" formControlName="quantity" placeholder="quantity">
-                            <input type="text" class="form-control form-control-lg rounded" formControlName="unit" placeholder="unit">
-                        </div>
-                    </div>
-                    <div class="col-2 text-end">
-                        <button class="btn btn-danger btn-lg" type="button" (click)="removeAt(i)"><i class="bi bi-trash-fill"></i></button>
+    <h1 class="text-center">Select Ingredients</h1>
+    <div formArrayName="recipeIngredients" *ngFor="let ing of  getRecipeIngredientsArray().controls; let i=index">
+        <div [formGroupName]="i" class="row mb-2 mt-4">
+            <div class="col-4">
+                <input type="text" class="form-control form-control-lg" formControlName="name" placeholder="name">
+                <!-- validation -->
+                <div *ngIf="getNameControl(i)?.invalid &&
+                    (getNameControl(i)?.dirty || getNameControl(i)?.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="getNameControl(i)?.hasError('required')">
+                        Name is required
                     </div>
                 </div>
             </div>
+
+            <div class="col-4">
+                <input type="text" class="form-control form-control-lg rounded" formControlName="quantity" placeholder="quantity">
+                <!-- validation -->
+                <div *ngIf="getQuantityControl(i)?.invalid &&
+                    (getQuantityControl(i)?.dirty || getQuantityControl(i)?.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="getQuantityControl(i)?.hasError('required')">
+                        Quantity is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <input type="text" class="form-control form-control-lg rounded" formControlName="unit" placeholder="unit">
+                <!-- validation -->
+                <div *ngIf="getUnitControl(i)?.invalid &&
+                    (getUnitControl(i)?.dirty || getUnitControl(i)?.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="getUnitControl(i)?.hasError('required')">
+                        Unit is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2 text-end">
+                <button class="btn btn-danger btn-lg" type="button" (click)="removeAt(i)"><i class="bi bi-trash-fill"></i></button>
+            </div>
         </div>
+    </div>
+    <div class="row">
         <div class="col-12 text-center">
             <button class="btn btn-secondary btn-lg" type="button" (click)="pushToArray()">
                 <i class="bi bi-plus-square-fill"></i>
             </button>
         </div>
-
-        <div class="col-12">
-            <button class="btn btn-primary btn-lg" type="submit">Save</button>
-        </div>
     </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-primary btn-lg" type="submit" [disabled]="!selectIngredientsForm.valid">Save</button>
+        </div>    
+    </div>
+
+    
 
     <div class="row mt-4">
         <div class="col-12" *ngFor="let ing of getRecipeIngredientsArray().controls; let i=index">
