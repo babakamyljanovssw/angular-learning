@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormArray, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 
 interface RecipeIngredient {
   name: string,
@@ -14,21 +14,21 @@ interface RecipeIngredient {
 })
 export class FormArrayComponent {
   recipeIngredientsMock: RecipeIngredient[] = [
-    {
-      name: 'Black Beans',
-      quantity: '50',
-      unit: 'g'
-    },
-    {
-      name: 'Salt',
-      quantity: '10',
-      unit: 'g'
-    },
-    {
-      name: 'Milk',
-      quantity: '100',
-      unit: 'ml'
-    },
+    // {
+    //   name: 'Black Beans',
+    //   quantity: '50',
+    //   unit: 'g'
+    // },
+    // {
+    //   name: 'Salt',
+    //   quantity: '10',
+    //   unit: 'g'
+    // },
+    // {
+    //   name: 'Milk',
+    //   quantity: '100',
+    //   unit: 'ml'
+    // },
   ];
   selectIngredientsForm: FormGroup;
 
@@ -100,9 +100,6 @@ export class FormArrayComponent {
 
   onSubmit() {
     const formData = this.getRecipeIngredientsArray().value;
-
-    const formConrtols = this.getRecipeIngredientsArray().controls;
-    console.log(formConrtols[0].get('name')?.value);
     this.recipeIngredientsMock = [];
     for (let index = 0; index < formData.length; index++) {
       this.recipeIngredientsMock.push(formData[index]);
